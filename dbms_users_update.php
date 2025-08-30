@@ -14,12 +14,12 @@
     <a class="navbar-brand fw-bold" href="dbms.php">จัดการ</a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="dbms_users_show.php">Users</a></li>
-        <li class="nav-item"><a class="nav-link" href="dbms_bookings_show.php">Bookings</a></li>
-        <li class="nav-item"><a class="nav-link" href="dbms_rooms_show.php">Rooms</a></li>
-        <li class="nav-item"><a class="nav-link" href="dbms_roomtypes_show.php">Roomtypes</a></li>
-        <li class="nav-item"><a class="nav-link" href="dbms_services_show.php">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php">หน้าแรก</a></li>
+        <li class="nav-item"><a class="nav-link active" href="dbms_users_show.php">ผู้ใช้</a></li>
+        <li class="nav-item"><a class="nav-link" href="dbms_bookings_show.php">การจอง</a></li>
+        <li class="nav-item"><a class="nav-link" href="dbms_rooms_show.php">ห้องพัก</a></li>
+        <li class="nav-item"><a class="nav-link" href="dbms_roomtypes_show.php">ประเภทห้องพัก</a></li>
+        <li class="nav-item"><a class="nav-link" href="dbms_services_show.php">บริการเสริม</a></li>
       </ul>
     </div>
   </div>
