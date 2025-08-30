@@ -50,7 +50,7 @@
 <?php
     include 'conn.php';
     $sql = "SELECT * FROM bookings";
-    $sql.= " INNER JOIN services ON bookings.service_id = services.service_id";
+    $sql.= " LEFT JOIN services ON bookings.service_id = services.service_id";
 
     $search = isset($_POST['search']) ? $_POST['search'] : '';
     if($search <> ''){

@@ -2,10 +2,10 @@
     include 'conn.php';
 
 #############################################################################################
-#                                 CMS USER EXECUTION SCRIPT                                 #
+#                                 DBMS USER EXECUTION SCRIPT                                #
 #############################################################################################
 
-    // cms_users_insert.php
+    // dbms_users_insert.php
     if (isset($_POST['users_chk']) && $_POST['users_chk'] == "insert"){
         $first_name   = isset($_POST['first_name']) ? $_POST['first_name'] : '';
         $last_name    = isset($_POST['last_name']) ? $_POST['last_name'] : '';
@@ -29,7 +29,7 @@
     $conn->close();
     }
 
-    // cms_users_delete.php
+    // dbms_users_delete.php
     if (isset($_GET['users_chk']) && $_GET['users_chk'] == "delete"){
         $val = $_GET['val'];
         $sql = "DELETE FROM users WHERE md5(user_id)='$val'";
@@ -47,7 +47,7 @@
     $conn->close();
     }
 
-    // cms_users_update.php
+    // dbms_users_update.php
     if (isset($_GET['users_chk']) && $_GET['users_chk'] == "update"){
         $user_id    = isset($_GET['user_id']) ? $_GET['user_id'] : '';
         $first_name = isset($_GET['first_name']) ? $_GET['first_name'] : '';
@@ -73,13 +73,13 @@
     }
 
 #############################################################################################
-#                               CMS BOOKINGS EXECUTION SCRIPT                               #
+#                               DBMS BOOKINGS EXECUTION SCRIPT                              #
 #############################################################################################
 
     session_start();
-    // cms_bookings_insert.php
+    // dbms_bookings_insert.php
     if (isset($_POST['bookings_chk']) && $_POST['bookings_chk'] == "insert"){
-        $user_id     = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+        $user_id     = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
         $room_id     = isset($_POST['room_id']) ? $_POST['room_id'] : '';
         $pet_name    = isset($_POST['pet_name']) ? $_POST['pet_name'] : '';
         $pet_type    = isset($_POST['pet_type']) ? $_POST['pet_type'] : '';
@@ -91,8 +91,21 @@
         $check_out   = isset($_POST['check_out']) ? $_POST['check_out'] : '';
         $pet_notes   = isset($_POST['pet_notes']) ? $_POST['pet_notes'] : '';
 
-    $sql = "INSERT INTO bookings(user_id , room_id , pet_name , pet_type , pet_breed , pet_age , pet_weight , status , check_in , check_out , pet_notes)";
-    $sql.= " VALUES('$user_id','$room_id','$pet_name','$pet_type','$pet_breed','$pet_age','pet_weight','$status','$check_in','$check_out','$pet_notes')";
+    $user_id = $_SESSION['user_id'] ?? null;
+    if(!$user_id){
+        echo "<center><h3>กรุณาเข้าสู่ระบบก่อนทำการจอง</h3></center>";
+        exit;
+    }
+
+    // ตรวจสอบ user_id จริงใน users
+    $check = $conn->query("SELECT user_id FROM users WHERE user_id='$user_id'");
+    if($check->num_rows == 0){
+        echo "<center><h3>ผู้ใช้ไม่ถูกต้อง ไม่สามารถจองได้</h3></center>";
+        exit;
+    }
+
+    $sql = "INSERT INTO bookings(user_id, room_id, pet_name, pet_type, pet_breed, pet_age, pet_weight, status, check_in, check_out, pet_notes)";
+    $sql.= " VALUES('$user_id','$room_id','$pet_name','$pet_type','$pet_breed','$pet_age','$pet_weight','$status','$check_in','$check_out','$pet_notes')";
 
     if($conn->query($sql) === TRUE){
         echo "<br><center>เพิ่มข้อมูลเรียบร้อย</center>";
@@ -107,7 +120,7 @@
     $conn->close();
     }
 
-    // cms_bookings_delete.php
+    // dbms_bookings_delete.php
     if (isset($_GET['bookings_chk']) && $_GET['bookings_chk'] == "delete"){
         $val = $_GET['val'];
         $sql = "DELETE FROM bookings WHERE md5(booking_id)='$val'";
@@ -125,7 +138,7 @@
     $conn->close();
     }
 
-    // cms_bookings_update.php
+    // dbms_bookings_update.php
     if (isset($_GET['bookings_chk']) && $_GET['bookings_chk'] == "update"){
         $booking_id  = isset($_GET['booking_id']) ? $_GET['booking_id'] : '';
         $room_id     = isset($_GET['room_id']) ? $_GET['room_id'] : '';
@@ -156,10 +169,10 @@
     }
 
 #############################################################################################
-#                                 CMS ROOM EXECUTION SCRIPT                                 #
+#                                 DBMS ROOM EXECUTION SCRIPT                                #
 #############################################################################################
 
-    // cms_rooms_insert.php
+    // dbms_rooms_insert.php
     if (isset($_POST['rooms_chk']) && $_POST['rooms_chk'] == "insert"){
         $room_number = isset($_POST['room_number']) ? $_POST['room_number'] : '';
         $type_id     = isset($_POST['type_id']) ? $_POST['type_id'] : '';
@@ -181,7 +194,7 @@
     $conn->close();
     }
 
-    // cms_rooms_delete.php
+    // dbms_rooms_delete.php
     if (isset($_GET['rooms_chk']) && $_GET['rooms_chk'] == "delete"){
         $val = $_GET['val'];
         $sql = "DELETE FROM rooms WHERE md5(room_id)='$val'";
@@ -199,7 +212,7 @@
     $conn->close();
     }
 
-    // cms_rooms_update.php
+    // dbms_rooms_update.php
     if (isset($_GET['rooms_chk']) && $_GET['rooms_chk'] == "update"){
         $room_id     = isset($_GET['room_id']) ? $_GET['room_id'] : '';
         $room_number = isset($_GET['room_number']) ? $_GET['room_number'] : '';
@@ -223,10 +236,10 @@
     }
 
 #############################################################################################
-#                               CMS ROOMTYPE EXECUTION SCRIPT                               #
+#                               DBMS ROOMTYPE EXECUTION SCRIPT                              #
 #############################################################################################
 
-    // cms_roomtypes_insert.php
+    // dbms_roomtypes_insert.php
     if (isset($_POST['roomtypes_chk']) && $_POST['roomtypes_chk'] == "insert"){
         $type_name       = isset($_POST['type_name']) ? $_POST['type_name'] : '';
         $description     = isset($_POST['description']) ? $_POST['description'] : '';
@@ -249,7 +262,7 @@
     $conn->close();
     }
 
-    // cms_roomtypes_delete.php
+    // dbms_roomtypes_delete.php
     if (isset($_GET['roomtypes_chk']) && $_GET['roomtypes_chk'] == "delete"){
         $val = $_GET['val'];
         $sql = "DELETE FROM roomtypes WHERE md5(type_id)='$val'";
@@ -267,7 +280,7 @@
     $conn->close();
     }
 
-    // cms_roomtypes_update.php
+    // dbms_roomtypes_update.php
     if (isset($_GET['roomtypes_chk']) && $_GET['roomtypes_chk'] == "update"){
         $type_id         = isset($_GET['type_id']) ? $_GET['type_id'] : '';
         $type_name       = isset($_GET['type_name']) ? $_GET['type_name'] : '';
@@ -291,10 +304,10 @@
     }
     
 #############################################################################################
-#                               CMS SERVICES EXECUTION SCRIPT                               #
+#                               DBMS SERVICES EXECUTION SCRIPT                              #
 #############################################################################################
 
-    // cms_services_insert.php
+    // dbms_services_insert.php
     if (isset($_POST['services_chk']) && $_POST['services_chk'] == "insert"){
         $service_name   = isset($_POST['service_name']) ? $_POST['service_name'] : '';
         $description    = isset($_POST['description']) ? $_POST['description'] : '';
@@ -317,7 +330,7 @@
     $conn->close();
     }
 
-    // cms_services_delete.php
+    // dbms_services_delete.php
     if (isset($_GET['services_chk']) && $_GET['services_chk'] == "delete"){
         $val = $_GET['val'];
         $sql = "DELETE FROM services WHERE md5(service_id)='$val'";
@@ -335,7 +348,7 @@
     $conn->close();
     }
 
-    // cms_services_update.php
+    // dbms_services_update.php
     if (isset($_GET['services_chk']) && $_GET['services_chk'] == "update"){
         $service_id     = isset($_GET['service_id']) ? $_GET['service_id'] : '';
         $service_name   = isset($_GET['service_name']) ? $_GET['service_name'] : '';
