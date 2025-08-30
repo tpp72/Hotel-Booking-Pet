@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<!-- Header -->
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
   <div class="container">
     <a class="navbar-brand" href="#">🐾 Pet Hotel</a>
@@ -41,43 +41,55 @@
 </nav>
 
 <!-- Hero Section -->
-<div class="bg-light p-5 text-center">
-  <h1 class="display-5 fw-bold">ยินดีต้อนรับสู่โรงแรมฝากสัตว์เลี้ยง</h1>
-  <p class="lead">บริการห้องพักและดูแลสัตว์เลี้ยงอย่างครบวงจร</p>
-  <a href="#booking" class="btn btn-success btn-lg">จองห้องพัก</a>
-</div>
+<header class="text-cener">
+  <img src="./img/pet-hotel.jpg" class="img-fluid w-100" alt="Hotel Image" style="hight: 80vh; object-fit: cover;">
+  <div class="position-absolute top-50 start-50 translate-middle">
+    <h1 class="display-5 fw-bold">ยินดีต้อนรับสู่โรงแรมฝากสัตว์เลี้ยง</h1>
+    <p class="lead">บริการห้องพักและดูแลสัตว์เลี้ยงอย่างครบวงจร</p>
+    <a href="#booking" class="btn btn-success btn-lg">จองห้องพัก</a>
+  </div>
+</header>
 
 <!-- Section: Available Rooms -->
-<div class="container my-5">
+<div class="container my-5" id="rooms">
   <h2 class="mb-4">ห้องพักที่พร้อมให้บริการ</h2>
   <div class="row">
     <!-- Room 1 -->
     <div class="col-md-4">
       <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">ห้อง Standard</h5>
-          <p class="card-text">ราคา 500 บาท/วัน</p>
-          <a href="#booking" class="btn btn-success">จองเลย</a>
+        <div class="card h-100">
+          <img src="./img/standard.png" class="card-img-top " alt="Standard Room">
+          <div class="card-body">
+            <h5 class="card-title">ห้อง Standard</h5>
+            <p class="card-text">ราคา 500 บาท/วัน</p>
+            <a href="#booking" class="btn btn-success">จองเลย</a>
+          </div>
         </div>
       </div>
     </div>
     <!-- Room 2 -->
     <div class="col-md-4">
       <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">ห้อง Deluxe</h5>
-          <p class="card-text">ราคา 800 บาท/วัน</p>
-          <a href="#booking" class="btn btn-success">จองเลย</a>
+        <div class="card h-100">
+          <img src="./img/deluxe.png" class="card-img-top h-100" alt="Deluxe Room">
+          <div class="card-body">
+            <h5 class="card-title">ห้อง Deluxe</h5>
+            <p class="card-text">ราคา 800 บาท/วัน</p>
+            <a href="#booking" class="btn btn-success">จองเลย</a>
+          </div>
         </div>
       </div>
     </div>
     <!-- Room 3 -->
     <div class="col-md-4">
       <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">ห้อง VIP</h5>
-          <p class="card-text">ราคา 1200 บาท/วัน</p>
-          <a href="#booking" class="btn btn-success">จองเลย</a>
+        <div class="card h-100">
+          <img src="./img/vip.png" class="card-img-top h-100" alt="VIP Room">
+          <div class="card-body">
+            <h5 class="card-title">ห้อง VIP</h5>
+            <p class="card-text">ราคา 1200 บาท/วัน</p>
+            <a href="#booking" class="btn btn-success">จองเลย</a>
+          </div>
         </div>
       </div>
     </div>
@@ -204,7 +216,7 @@
 <!-- Footer -->
 <footer id="contact" class="bg-dark text-white text-center py-4">
   <div class="container">
-    <p class="mb-0">&copy; 2025 MyHotel. All rights reserved.</p>
+    <p class="mb-0">&copy; 2025 🐾 Pet Hotel. All rights reserved.</p>
   </div>
 </footer>
 </html>

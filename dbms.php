@@ -11,7 +11,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="dbms.php">ADMIN</a>
+    <a class="navbar-brand fw-bold" href="dbms.php">จัดการ</a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
@@ -20,7 +20,6 @@
         <li class="nav-item"><a class="nav-link" href="dbms_rooms_show.php">Rooms</a></li>
         <li class="nav-item"><a class="nav-link" href="dbms_roomtypes_show.php">Roomtypes</a></li>
         <li class="nav-item"><a class="nav-link" href="dbms_services_show.php">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="dbms_bookings_services_show.php">Booking Services</a></li>
       </ul>
     </div>
   </div>
@@ -38,7 +37,6 @@
                 <option>ข้อมูลห้องพัก</option>
                 <option>ข้อมูลประเภทห้องพัก</option>
                 <option>ข้อมูลบริการ</option>
-                <option>ข้อมูลการจองบริการ</option>
             </select>
         <div class="col-12 text-center">
             <input type="hidden" name="chk" id="chk" value="confirm">

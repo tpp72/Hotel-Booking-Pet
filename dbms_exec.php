@@ -159,7 +159,68 @@
 #                                 CMS ROOM EXECUTION SCRIPT                                 #
 #############################################################################################
 
-    
+    // cms_rooms_insert.php
+    if (isset($_POST['rooms_chk']) && $_POST['rooms_chk'] == "insert"){
+        $room_number = isset($_POST['room_number']) ? $_POST['room_number'] : '';
+        $type_id     = isset($_POST['type_id']) ? $_POST['type_id'] : '';
+        $status      = isset($_POST['status']) ? $_POST['status'] : '';
+
+    $sql = "INSERT INTO rooms(room_number , type_id , status)";
+    $sql.= " VALUES('$room_number','$type_id','$status')";
+
+    if($conn->query($sql) === TRUE){
+        echo "<br><center>เพิ่มข้อมูลเรียบร้อย</center>";
+        echo "<br><center>กรุณารอสักครู่...</center>";
+        echo "<meta http-equiv='refresh' content='5;url=dbms_rooms_show.php'>";
+    }else{
+        echo "<br><center><h3>เพิ่มข้อมูลไม่สำเร็จ</h3></center>";
+        echo "<center><h3>กรุณาลองใหม่อีกครั้ง...</h3></center>";
+        echo "<meta http-equiv='refresh' content='2;url=dbms_rooms_insert.php'>";
+    }
+
+    $conn->close();
+    }
+
+    // cms_rooms_delete.php
+    if (isset($_GET['rooms_chk']) && $_GET['rooms_chk'] == "delete"){
+        $val = $_GET['val'];
+        $sql = "DELETE FROM rooms WHERE md5(room_id)='$val'";
+
+    if($conn->query($sql) === TRUE){
+            echo "<br><center>ลบข้อมูลเรียบร้อย;</center>";
+            echo "<br><center>กรุณารอสักครู่...</center>";
+            echo "<meta http-equiv='refresh' content='1;url=dbms_rooms_delete.php'>";
+    }else{
+        echo "<br><center><h3>ลบข้อมูลไม่สำเร็จ</h3></center>";
+        echo "<center><h3>กรุณาลองใหม่อีกครั้ง...</h3></center>";
+        echo "<meta http-equiv='refresh' content='2;url=dbms_rooms_delete.php'>";
+    }
+
+    $conn->close();
+    }
+
+    // cms_rooms_update.php
+    if (isset($_GET['rooms_chk']) && $_GET['rooms_chk'] == "update"){
+        $room_id     = isset($_GET['room_id']) ? $_GET['room_id'] : '';
+        $room_number = isset($_GET['room_number']) ? $_GET['room_number'] : '';
+        $type_id     = isset($_GET['type_id']) ? $_GET['type_id'] : '';
+        $status      = isset($_GET['status']) ? $_GET['status'] : '';
+
+        $sql = "UPDATE rooms SET room_number = '$room_number', type_id = '$type_id', status = '$status'";
+        $sql.= " WHERE room_id = '$room_id'";
+
+    if($conn->query($sql) === TRUE){
+            echo "<br><center>แก้ไขข้อมูลเรียบร้อย;</center>";
+            echo "<br><center>กรุณารอสักครู่...</center>";
+            echo "<meta http-equiv='refresh' content='1;url=dbms_rooms_update.php'>";
+    }else{
+        echo "<br><center><h3>เเก้ไขข้อมูลไม่สำเร็จ</h3></center>";
+        echo "<center><h3>กรุณาลองใหม่อีกครั้ง...</h3></center>";
+        echo "<meta http-equiv='refresh' content='2;url=dbms_rooms_update2.php'>";
+    }
+
+    $conn->close();
+    }
 
 #############################################################################################
 #                               CMS ROOMTYPE EXECUTION SCRIPT                               #
@@ -178,11 +239,11 @@
     if($conn->query($sql) === TRUE){
         echo "<br><center>เพิ่มข้อมูลเรียบร้อย</center>";
         echo "<br><center>กรุณารอสักครู่...</center>";
-        echo "<meta http-equiv='refresh' content='1;url=cms_roomtypes_show.php'>";
+        echo "<meta http-equiv='refresh' content='1;url=dbms_roomtypes_show.php'>";
     }else{
         echo "<br><center><h3>เพิ่มข้อมูลไม่สำเร็จ</h3></center>";
         echo "<center><h3>กรุณาลองใหม่อีกครั้ง...</h3></center>";
-        echo "<meta http-equiv='refresh' content='2;url=cms_roomtypes_insert.php'>";
+        echo "<meta http-equiv='refresh' content='2;url=dbms_roomtypes_insert.php'>";
     }
 
     $conn->close();
@@ -196,11 +257,11 @@
     if($conn->query($sql) === TRUE){
             echo "<br><center>ลบข้อมูลเรียบร้อย;</center>";
             echo "<br><center>กรุณารอสักครู่...</center>";
-            echo "<meta http-equiv='refresh' content='1;url=cms_roomtypes_delete.php'>";
+            echo "<meta http-equiv='refresh' content='1;url=dbms_roomtypes_delete.php'>";
     }else{
         echo "<br><center><h3>ลบข้อมูลไม่สำเร็จ</h3></center>";
         echo "<center><h3>กรุณาลองใหม่อีกครั้ง...</h3></center>";
-        echo "<meta http-equiv='refresh' content='2;url=cms_roomtypes_delete.php'>";
+        echo "<meta http-equiv='refresh' content='2;url=dbms_roomtypes_delete.php'>";
     }
 
     $conn->close();
@@ -219,11 +280,11 @@
     if($conn->query($sql) === TRUE){
             echo "<br><center>แก้ไขข้อมูลเรียบร้อย;</center>";
             echo "<br><center>กรุณารอสักครู่...</center>";
-            echo "<meta http-equiv='refresh' content='1;url=cms_roomtypes_update.php'>";
+            echo "<meta http-equiv='refresh' content='1;url=dbms_roomtypes_update.php'>";
     }else{
         echo "<br><center><h3>เเก้ไขข้อมูลไม่สำเร็จ</h3></center>";
         echo "<center><h3>กรุณาลองใหม่อีกครั้ง...</h3></center>";
-        echo "<meta http-equiv='refresh' content='2;url=cms_roomtypes_update2.php'>";
+        echo "<meta http-equiv='refresh' content='2;url=dbms_roomtypes_update2.php'>";
     }
 
     $conn->close();
@@ -240,17 +301,17 @@
         $price          = isset($_POST['price']) ? $_POST['price'] : '';
 
 
-    $sql = "INSERT INTO services(service_name , description , price)";
-    $sql.= " VALUES('$service_name','$description','$price')";
+    $sql = "INSERT INTO services(service_name  , price)";
+    $sql.= " VALUES('$service_name','$price')";
 
     if($conn->query($sql) === TRUE){
         echo "<br><center>เพิ่มข้อมูลเรียบร้อย</center>";
         echo "<br><center>กรุณารอสักครู่...</center>";
-        echo "<meta http-equiv='refresh' content='1;url=cms_services_show.php'>";
+        echo "<meta http-equiv='refresh' content='1;url=dbms_services_show.php'>";
     }else{
         echo "<br><center><h3>เพิ่มข้อมูลไม่สำเร็จ</h3></center>";
         echo "<center><h3>กรุณาลองใหม่อีกครั้ง...</h3></center>";
-        echo "<meta http-equiv='refresh' content='2;url=cms_services_insert.php'>";
+        echo "<meta http-equiv='refresh' content='2;url=dbms_services_insert.php'>";
     }
 
     $conn->close();
@@ -264,11 +325,11 @@
     if($conn->query($sql) === TRUE){
             echo "<br><center>ลบข้อมูลเรียบร้อย;</center>";
             echo "<br><center>กรุณารอสักครู่...</center>";
-            echo "<meta http-equiv='refresh' content='1;url=cms_services_delete.php'>";
+            echo "<meta http-equiv='refresh' content='1;url=dbms_services_delete.php'>";
     }else{
         echo "<br><center><h3>ลบข้อมูลไม่สำเร็จ</h3></center>";
         echo "<center><h3>กรุณาลองใหม่อีกครั้ง...</h3></center>";
-        echo "<meta http-equiv='refresh' content='2;url=cms_services_delete.php'>";
+        echo "<meta http-equiv='refresh' content='2;url=dbms_services_delete.php'>";
     }
 
     $conn->close();
@@ -278,20 +339,19 @@
     if (isset($_GET['services_chk']) && $_GET['services_chk'] == "update"){
         $service_id     = isset($_GET['service_id']) ? $_GET['service_id'] : '';
         $service_name   = isset($_GET['service_name']) ? $_GET['service_name'] : '';
-        $description    = isset($_GET['description']) ? $_GET['description'] : '';
         $price          = isset($_GET['price']) ? $_GET['price'] : '';
 
-        $sql = "UPDATE services SET service_name = '$service_name', description = '$description', price = '$price'";
+        $sql = "UPDATE services SET service_name = '$service_name',  price = '$price'";
         $sql.= " WHERE service_id = '$service_id'";
 
     if($conn->query($sql) === TRUE){
             echo "<br><center>แก้ไขข้อมูลเรียบร้อย;</center>";
             echo "<br><center>กรุณารอสักครู่...</center>";
-            echo "<meta http-equiv='refresh' content='1;url=cms_services_update.php'>";
+            echo "<meta http-equiv='refresh' content='1;url=dbms_services_update.php'>";
     }else{
         echo "<br><center><h3>เเก้ไขข้อมูลไม่สำเร็จ</h3></center>";
         echo "<center><h3>กรุณาลองใหม่อีกครั้ง...</h3></center>";
-        echo "<meta http-equiv='refresh' content='2;url=cms_services_update2.php'>";
+        echo "<meta http-equiv='refresh' content='2;url=dbms_services_update2.php'>";
     }
 
     $conn->close();

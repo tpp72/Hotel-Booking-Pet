@@ -1,9 +1,12 @@
+<?php
+    include 'conn.php';
+?>
 <!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pet Hotel :: เพิ่มข้อมูลผู้ใช้</title>
+  <title>Pet Hotel :: เพิ่มข้อมูลห้องพัก</title>
   <link rel="icon" type="image/png" href="./img/logo.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -27,30 +30,33 @@
 
 <body>
   <div class="container mt-3">
-    <form class="row g-3" name="dbms_users_insert" id="dbms_users_insert" method="post" action="dbms_exec.php" enctype="multipart/form-data">
-        <h2 class="text-center mb-4">เพิ่มข้อมูลผู้ใช้</h2>
+    <form class="row g-3" name="dbms_rooms_insert" id="dbms_rooms_insert" method="post" action="dbms_exec.php" enctype="multipart/form-data">
+        <h2 class="text-center mb-4">เพิ่มข้อมูลห้องพัก</h2>
         <div>
-            <label class="form-label">ชื่อจริง</label>
-            <input class="form-control" type="text" name="first_name" id="first_name" placeholder="ชื่อจริง" required>
+            <label class="form-label">หมายเลขห้องพัก</label>
+            <input class="form-control" type="number" name="room_number" id="room_number" placeholder="หมายเลขห้องพัก" required>
         </div>
         <div>
-            <label class="form-label">นามสกุล</label>
-            <input class="form-control" type="text" name="last_name" id="last_name" placeholder="นามสกุล" required>
+            <label class="form-label">ประเภทห้องพัก</label>
+            <select class="form-select" name="type_id" id="type_id">
+                <?php
+                    $result = $conn->query("SELECT type_id, type_name FROM roomtypes");
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='{$row['type_id']}'>Room {$row['type_name']}</option>";
+                    }
+                ?>
+            </select>
         </div>
         <div>
-            <label class="form-label">อีเมล</label>
-            <input class="form-control" type="email" name="email" id="email" placeholder="อีเมล" required>
-        </div>
-        <div>
-            <label class="form-label">รหัสผ่าน</label>
-            <input class="form-control" type="password" name="password" id="password" placeholder="รหัสผ่าน" required>
-        </div>
-        <div>
-            <label class="form-label">เบอรโทรศัพท์</label>
-            <input class="form-control" type="number" name="phone" id="phone" placeholder="เบอรโทรศัพท์" required>
+            <label class="form-label">สถานะห้องพัก</label>
+            <select class="form-select" name="status" id="status">
+                <option>Available</option>
+                <option>Booked</option>
+                <option>Maintenance</option>
+            </select>
         </div>
         <div class="col-12 text-center">
-            <input type="hidden" name="users_chk" id="users_chk" value="insert">
+            <input type="hidden" name="rooms_chk" id="rooms_chk" value="insert">
             <button type="submit" name="submit" id="submit" class="btn btn-success">บันทึกข้อมูล</button>
         </div>
     </form>
